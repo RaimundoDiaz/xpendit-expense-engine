@@ -23,5 +23,8 @@ dist/
 CLAUDE.md
 .claude/
 
+# Guion del video — local, no se sube al repo
+GUION_VIDEO.md
+
 # OS
 .DS_Store
