@@ -8,8 +8,8 @@ negocio está en `docs/00-overview.md` y siguientes.
 Motor que valida gastos contra una política configurable y devuelve un estado
 (`APROBADO` / `PENDIENTE` / `RECHAZADO`) con alertas. Se construye en 3 partes:
 1. Motor de reglas (lógica pura) — **listo**.
-2. Cliente de tasas de cambio (Open Exchange Rates).
-3. Analizador de lotes sobre un CSV.
+2. Cliente de tasas de cambio (Open Exchange Rates) — **listo**.
+3. Analizador de lotes sobre un CSV — pendiente.
 
 ## Capas (Clean Architecture / Hexagonal)
 
@@ -76,6 +76,21 @@ requiera un dato nuevo no cambia la firma de `evaluate`.
 - `NormalizedExpense` — gasto + `amount_base` (USD), conserva el original.
 - `Alert`, `ValidationResult` — serializan al español del spec con `serialization_alias`.
 - Dinero en `Decimal`; `Status` es un `Literal` de los 3 estados.
+
+## Integración de tasas (Parte 2)
+
+`OpenExchangeRatesClient` (`infrastructure/exchange_rates/`) implementa el puerto
+`ExchangeRateProvider` — la **misma interfaz** que el mock, así que el dominio no cambia
+al pasar de mock a API real (solo se inyecta otra implementación).
+
+- Usa el endpoint **histórico** `/historical/YYYY-MM-DD.json`: cada gasto se convierte
+  con la tasa del **día en que se hizo**, no la de hoy (correcto contablemente; ver
+  `docs/02-parte2-exchange-api.md`).
+- **Cache por fecha** en memoria → pedir la misma fecha N veces hace 1 sola llamada HTTP
+  (evita el problema N+1; esta es la base de la optimización de la Parte 3).
+- Errores tipados: `ExchangeRateAPIError` (red / status != 200 / payload inválido) y
+  `RateUnavailableError` (moneda ausente).
+- La API key se carga de `.env.local` con `infrastructure/config.py` (nunca hardcodeada).
 
 ## Convenciones
 
