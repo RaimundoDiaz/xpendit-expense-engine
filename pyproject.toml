@@ -1,0 +1,37 @@
+[project]
+name = "expense-engine"
+version = "0.1.0"
+description = "Motor de Reglas de Gastos — Xpendit (desafío técnico)"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.6",
+    "requests>=2.31",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pyright>=1.1.350",
+    "responses>=0.25",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+addopts = "-v"
+
+[tool.pyright]
+include = ["src", "tests"]
+extraPaths = ["src"]
+typeCheckingMode = "strict"
+pythonVersion = "3.12"
+venvPath = "."
+venv = ".venv"
