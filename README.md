@@ -33,10 +33,11 @@ cli  →  infrastructure  →  application  →  domain
 ```bash
 python3.12 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements-dev.txt   # incluye runtime + herramientas de desarrollo
+pip install -r requirements-dev.txt   # runtime + herramientas de desarrollo (tests, pyright)
+pip install -e .                      # instala el paquete (habilita `python -m expense_engine...`)
 ```
 
-(Para solo ejecutar, sin dev tools: `pip install -r requirements.txt`.)
+(Para solo ejecutar, sin dev tools: `pip install -r requirements.txt && pip install -e .`.)
 
 ## Configuración (API Key)
 

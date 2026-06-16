@@ -105,6 +105,22 @@ class NormalizedExpense:
     amount_base: Decimal
 
 
+@dataclass(frozen=True)
+class ExpenseRecord:
+    """Un gasto junto al empleado que lo reportó (una fila del CSV)."""
+
+    expense: Expense
+    employee: Employee
+
+
+@dataclass(frozen=True)
+class NormalizedRecord:
+    """Un registro cuyo gasto ya fue convertido a la moneda base."""
+
+    normalized_expense: NormalizedExpense
+    employee: Employee
+
+
 class Alert(BaseModel):
     """Una alerta adjunta a un resultado. Se serializa como {codigo, mensaje}."""
 
