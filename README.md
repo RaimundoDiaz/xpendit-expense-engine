@@ -1,8 +1,8 @@
 # Xpendit — Motor de Reglas de Gastos
 
+[![CI](https://github.com/RaimundoDiaz/xpendit-expense-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/RaimundoDiaz/xpendit-expense-engine/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)
 ![Type-checked](https://img.shields.io/badge/pyright-strict-2ca5e0)
-![Tests](https://img.shields.io/badge/tests-pytest-0A9EDC?logo=pytest&logoColor=white)
 ![Arquitectura](https://img.shields.io/badge/arquitectura-hexagonal-8A2BE2)
 
 > Valida gastos contra una política configurable (`APROBADO` · `PENDIENTE` · `RECHAZADO`),
@@ -16,11 +16,14 @@ Construido en 3 partes que se apoyan una sobre otra: (1) motor de reglas puro,
 
 ## Arquitectura
 
-Clean Architecture / Hexagonal — el dominio es puro y no conoce la infraestructura:
+Clean Architecture / Hexagonal — el dominio es puro y no conoce la infraestructura. Las
+dependencias apuntan **hacia adentro**:
 
-```
-cli  →  infrastructure  →  application  →  domain
-                                            (puro, sin I/O)
+```mermaid
+flowchart LR
+    CLI["cli / api"] --> INFRA["infrastructure<br/><i>HTTP · CSV · config</i>"]
+    INFRA --> APP["application<br/><i>orquestación · puertos</i>"]
+    APP --> DOMAIN["domain<br/><i>reglas · resolver · motor</i><br/><b>puro, sin I/O</b>"]
 ```
 
 - **domain/**: modelos, reglas (patrón Strategy), resolvedor de prioridades y el motor. Sin red ni archivos.
@@ -127,7 +130,8 @@ Además del alcance del desafío (Partes 1–3) agregamos, **por iniciativa prop
 pensado para la evolución en vivo del código:
 
 - **Código:** scaffold de reglas, provider de tasas con fallback, lectura streaming del CSV,
-  scaffold de API HTTP (`api/`, deps opcionales) y el `setup.sh` de instalación.
+  scaffold de API HTTP (`api/`, deps opcionales), `setup.sh` de instalación y **CI** (GitHub
+  Actions: `pytest` + `pyright` en cada push).
 - **Tooling de IA** (el evaluador fomenta el uso de IA, así que lo versionamos en `.claude/`):
   - *Skills* — `nueva-regla`, `nuevo-provider`, `nueva-anomalia`, `exponer-api`, `preparar-proyecto`.
   - *Agentes* — `revisor-de-reglas`, `guardian-arquitectura`, `qa-y-pruebas`.

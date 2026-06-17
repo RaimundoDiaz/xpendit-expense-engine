@@ -62,7 +62,11 @@ y los ajustes locales de la herramienta).
 pyright) de forma **determinista y sin IA**. La skill `preparar-proyecto` lo ejecuta e
 interpreta para un flujo "un solo prompt" con Claude Code. Ver el inicio rápido en el `README.md`.
 
-### 7. Documentación de escalabilidad y wiki
+### 7. Integración continua (`.github/workflows/ci.yml`)
+Workflow de GitHub Actions que corre `pytest` + `pyright` (strict) en cada push y PR a `main`.
+Refuerza la señal de calidad y evita regresiones. **Parte del repo.**
+
+### 8. Documentación de escalabilidad y wiki
 - [`07-escalabilidad.md`](07-escalabilidad.md): mapa de ejes de crecimiento y seams.
 - Una **wiki de GitHub** con toda la documentación navegable.
 
