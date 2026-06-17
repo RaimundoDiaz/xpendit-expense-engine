@@ -10,5 +10,7 @@ Documentación interna del desafío. Leer en orden:
 6. [05 — Entregables](05-deliverables.md) — qué entregar y cómo
 7. [06 — Decisiones](06-decisiones.md) — stack y forma de trabajo
 8. [ARQUITECTURA](ARQUITECTURA.md) — visión técnica: capas, flujo de datos, patrón de reglas
+9. [07 — Escalabilidad](07-escalabilidad.md) — *(extra)* ejes de crecimiento y puntos de extensión
+10. [08 — Extras por iniciativa propia](08-extras-iniciativa.md) — *(extra)* catálogo de lo que agregamos fuera del alcance del desafío
 
 > El `README.md` de la raíz del repo (entregable final, instrucciones de instalación/uso) es distinto de este. Este `docs/` es documentación de trabajo interna.

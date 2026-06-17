@@ -13,6 +13,12 @@
    - Cómo correr los tests (`pytest`).
    - Cómo correr el analizador de lotes (ej. `python analizar.py`).
 
+## Extras por iniciativa propia (fuera de alcance)
+Más allá de los entregables obligatorios, agregamos trabajo adicional por iniciativa propia
+(scaffolds, provider con fallback, streaming, scaffold de API, docs de escalabilidad y wiki).
+Está catalogado y claramente marcado en [`08-extras-iniciativa.md`](08-extras-iniciativa.md)
+para que el evaluador sepa que el código "de más" es deliberado, no un error.
+
 ## Recordatorios de evaluación
 - Manejo de secretos: `.env.local` gitignored, nunca commitear la key.
 - Manejo de errores y separación de responsabilidades.

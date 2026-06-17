@@ -79,3 +79,12 @@ tests/                pruebas unitarias
 docs/                 documentación de diseño del proyecto
 ANALISIS.md           hallazgos del análisis de lotes (Parte 3)
 ```
+
+## Extras (iniciativa propia)
+
+Además del alcance del desafío (Partes 1–3) agregamos, **por iniciativa propia**, trabajo
+pensado para la evolución en vivo del código: scaffolds, un provider de tasas con fallback,
+lectura streaming del CSV y un scaffold de API HTTP. Todo está catalogado y explicado en
+[`docs/08-extras-iniciativa.md`](docs/08-extras-iniciativa.md), con el análisis de escala en
+[`docs/07-escalabilidad.md`](docs/07-escalabilidad.md). Si ven archivos "de más", no es un
+error: es trabajo deliberado y documentado.
