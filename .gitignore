@@ -19,9 +19,13 @@ dist/
 # Type checker
 .pyright/
 
-# Archivos de Claude — no se suben al repositorio (quedan locales)
+# Archivos de Claude
+# Las skills (.claude/skills/) y agentes (.claude/agents/) SÍ se versionan: son trabajo por
+# iniciativa propia que mostramos (ver docs/08-extras-iniciativa.md). Lo que queda local:
+# - CLAUDE.md: instrucciones internas del proyecto
+# - .claude/settings.local.json: ajustes/permisos locales de la herramienta
 CLAUDE.md
-.claude/
+.claude/settings.local.json
 
 # Guion del video — local, no se sube al repo
 GUION_VIDEO.md

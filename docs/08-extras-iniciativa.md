@@ -44,11 +44,17 @@ pip install -r requirements-api.txt        # o:  pip install -e ".[api]"
 uvicorn expense_engine.api.app:app --reload
 ```
 
-### 5. Skills de Claude Code (`.claude/skills/`) — *no se versionan*
-Meta-herramientas que automatizan el scaffolding repetitivo durante la evolución del código:
-`nueva-regla`, `nuevo-provider`, `nueva-anomalia`, `exponer-api`. Viven en `.claude/`
-(gitignored), así que **no forman parte del repo entregado**; las mencionamos por
-transparencia sobre cómo trabajamos.
+### 5. Tooling de Claude Code (`.claude/`) — *versionado a propósito*
+Como el evaluador **fomenta el uso de IA**, versionamos nuestro tooling para que se vea cómo
+trabajamos. Lo dejamos en el repo de forma deliberada (lo único que queda local es `CLAUDE.md`
+y los ajustes locales de la herramienta).
+
+- **Skills** (`.claude/skills/`) — automatizan el scaffolding repetitivo durante la evolución
+  del código: `nueva-regla`, `nuevo-provider`, `nueva-anomalia`, `exponer-api`.
+- **Agentes** (`.claude/agents/`) — revisores especializados, complemento de las skills:
+  - `revisor-de-reglas` — audita una regla nueva (3 estados, alertas, registro, tests).
+  - `guardian-arquitectura` — verifica los límites hexagonales (dominio puro, deps hacia adentro).
+  - `qa-y-pruebas` — QA del código: corre la suite + pyright, detecta huecos y escribe tests.
 
 ### 6. Documentación de escalabilidad y wiki
 - [`07-escalabilidad.md`](07-escalabilidad.md): mapa de ejes de crecimiento y seams.
