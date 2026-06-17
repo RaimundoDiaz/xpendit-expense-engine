@@ -1,0 +1,5 @@
+-r requirements.txt
+# Extra por iniciativa propia (fuera del alcance del desafío): scaffold de API HTTP.
+# Ver docs/08-extras-iniciativa.md.
+fastapi>=0.110
+httpx>=0.27
