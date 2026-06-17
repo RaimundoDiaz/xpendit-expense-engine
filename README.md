@@ -1,11 +1,18 @@
 # Xpendit — Motor de Reglas de Gastos
 
-Prototipo del **Motor de Reglas de Gastos** de Xpendit: valida gastos contra una política
-configurable (estados `APROBADO` / `PENDIENTE` / `RECHAZADO`), convierte monedas usando tasas
-históricas reales (Open Exchange Rates) y analiza un lote de gastos detectando anomalías.
+![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)
+![Type-checked](https://img.shields.io/badge/pyright-strict-2ca5e0)
+![Tests](https://img.shields.io/badge/tests-pytest-0A9EDC?logo=pytest&logoColor=white)
+![Arquitectura](https://img.shields.io/badge/arquitectura-hexagonal-8A2BE2)
 
-Construido en 3 partes: (1) motor de reglas puro, (2) cliente de tasas de cambio,
-(3) analizador de lotes sobre un CSV.
+> Valida gastos contra una política configurable (`APROBADO` · `PENDIENTE` · `RECHAZADO`),
+> convierte monedas con tasas históricas reales (Open Exchange Rates) y analiza lotes de
+> gastos detectando anomalías.
+
+Construido en 3 partes que se apoyan una sobre otra: (1) motor de reglas puro,
+(2) cliente de tasas de cambio inyectable, (3) analizador de lotes sobre un CSV.
+
+📖 **Documentación navegable:** [Wiki del proyecto](https://github.com/RaimundoDiaz/xpendit-expense-engine/wiki)
 
 ## Arquitectura
 
@@ -71,31 +78,47 @@ cp .env.example .env.local
 
 `.env.local` está en `.gitignore` — la clave nunca se commitea.
 
-## Ejecutar las pruebas
+## Uso
+
+Activa el entorno (`source .venv/bin/activate`) y luego:
 
 ```bash
-pytest
-```
-
-## Type checking (pyright strict)
-
-```bash
-pyright
-```
-
-## Ejecutar el analizador de lotes
-
-```bash
+pytest                 # correr las pruebas unitarias
+pyright                # type-check estricto
 python -m expense_engine.cli.analyze "Desafío técnico — Xpendit/gastos_historicos.csv"
+```
+
+El analizador imprime el desglose por estado y las anomalías. Con `--json` devuelve el
+resultado por gasto.
+
+### Ejemplo de salida (`--json`)
+
+Cada gasto se resuelve al contrato `{gasto_id, status, alertas}`:
+
+```json
+[
+  { "gasto_id": "g_001", "status": "APROBADO", "alertas": [] },
+  {
+    "gasto_id": "g_007",
+    "status": "RECHAZADO",
+    "alertas": [
+      { "codigo": "LIMITE_CATEGORIA", "mensaje": "Gasto de 'food' excede el límite permitido." }
+    ]
+  }
+]
 ```
 
 ## Estructura
 
 ```
-src/expense_engine/   código fuente (domain / application / infrastructure / cli)
-tests/                pruebas unitarias
-docs/                 documentación de diseño del proyecto
+src/expense_engine/   código fuente (domain / application / infrastructure / cli / api *)
+tests/                pruebas unitarias (espejo de src/)
+docs/                 documentación de diseño
+.claude/              skills y agentes de Claude Code *
+setup.sh              instalación en un comando *
 ANALISIS.md           hallazgos del análisis de lotes (Parte 3)
+
+* extra por iniciativa propia — ver docs/08-extras-iniciativa.md
 ```
 
 ## Extras (iniciativa propia)
