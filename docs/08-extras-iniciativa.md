@@ -50,13 +50,19 @@ trabajamos. Lo dejamos en el repo de forma deliberada (lo único que queda local
 y los ajustes locales de la herramienta).
 
 - **Skills** (`.claude/skills/`) — automatizan el scaffolding repetitivo durante la evolución
-  del código: `nueva-regla`, `nuevo-provider`, `nueva-anomalia`, `exponer-api`.
+  del código: `nueva-regla`, `nuevo-provider`, `nueva-anomalia`, `exponer-api`, y
+  `preparar-proyecto` (ver item 6).
 - **Agentes** (`.claude/agents/`) — revisores especializados, complemento de las skills:
   - `revisor-de-reglas` — audita una regla nueva (3 estados, alertas, registro, tests).
   - `guardian-arquitectura` — verifica los límites hexagonales (dominio puro, deps hacia adentro).
   - `qa-y-pruebas` — QA del código: corre la suite + pyright, detecta huecos y escribe tests.
 
-### 6. Documentación de escalabilidad y wiki
+### 6. Setup en un comando (`setup.sh` + skill `preparar-proyecto`)
+`setup.sh` deja el proyecto listo (venv, dependencias, `.env.local`, verificación con tests +
+pyright) de forma **determinista y sin IA**. La skill `preparar-proyecto` lo ejecuta e
+interpreta para un flujo "un solo prompt" con Claude Code. Ver el inicio rápido en el `README.md`.
+
+### 7. Documentación de escalabilidad y wiki
 - [`07-escalabilidad.md`](07-escalabilidad.md): mapa de ejes de crecimiento y seams.
 - Una **wiki de GitHub** con toda la documentación navegable.
 

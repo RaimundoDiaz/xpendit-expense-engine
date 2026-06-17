@@ -28,7 +28,25 @@ cli  →  infrastructure  →  application  →  domain
 
 - Python 3.12+
 
-## Instalación
+## Inicio rápido
+
+**Un solo comando** — crea el venv, instala todo, configura `.env.local` y verifica con tests + pyright:
+
+```bash
+bash setup.sh
+```
+
+**Con Claude Code** *(extra, iniciativa propia)* — clona el repo, abre Claude Code en la carpeta
+y pega este prompt; la skill `preparar-proyecto` deja todo instalado y verificado:
+
+```text
+Prepara este proyecto y déjalo listo para correr: instala dependencias, configura el
+entorno y verifica con los tests. Usa la skill preparar-proyecto.
+```
+
+(También puedes invocarla directamente con `/preparar-proyecto`.)
+
+## Instalación manual
 
 ```bash
 python3.12 -m venv .venv
@@ -83,8 +101,15 @@ ANALISIS.md           hallazgos del análisis de lotes (Parte 3)
 ## Extras (iniciativa propia)
 
 Además del alcance del desafío (Partes 1–3) agregamos, **por iniciativa propia**, trabajo
-pensado para la evolución en vivo del código: scaffolds, un provider de tasas con fallback,
-lectura streaming del CSV y un scaffold de API HTTP. Todo está catalogado y explicado en
-[`docs/08-extras-iniciativa.md`](docs/08-extras-iniciativa.md), con el análisis de escala en
-[`docs/07-escalabilidad.md`](docs/07-escalabilidad.md). Si ven archivos "de más", no es un
-error: es trabajo deliberado y documentado.
+pensado para la evolución en vivo del código:
+
+- **Código:** scaffold de reglas, provider de tasas con fallback, lectura streaming del CSV,
+  scaffold de API HTTP (`api/`, deps opcionales) y el `setup.sh` de instalación.
+- **Tooling de IA** (el evaluador fomenta el uso de IA, así que lo versionamos en `.claude/`):
+  - *Skills* — `nueva-regla`, `nuevo-provider`, `nueva-anomalia`, `exponer-api`, `preparar-proyecto`.
+  - *Agentes* — `revisor-de-reglas`, `guardian-arquitectura`, `qa-y-pruebas`.
+- **Documentación:** análisis de escala y una wiki navegable.
+
+Todo está catalogado en [`docs/08-extras-iniciativa.md`](docs/08-extras-iniciativa.md), con el
+análisis de escala en [`docs/07-escalabilidad.md`](docs/07-escalabilidad.md). Si ven archivos
+"de más", no es un error: es trabajo deliberado y documentado.
