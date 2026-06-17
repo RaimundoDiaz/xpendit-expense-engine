@@ -19,7 +19,7 @@ cuando implementes tu lógica.
 
 from __future__ import annotations
 
-from expense_engine.domain.models import Alert
+from expense_engine.domain.models import Alert  # pyright: ignore[reportUnusedImport]  # noqa: F401  (usado al descomentar los casos)
 from expense_engine.domain.rules.base import EvaluationContext, PartialEvaluation
 
 
